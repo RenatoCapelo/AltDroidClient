@@ -22,7 +22,7 @@
         <ImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/googleplaylogo"
+            android:src="@drawable/GooglePlayLogo"
             android:contentDescription="Logotype of the Application"/>
         <TextView
             android:text="Login"

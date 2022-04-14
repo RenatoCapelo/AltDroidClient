@@ -70,6 +70,8 @@
     <Compile Include="Logic\Activities\MainActivity.cs" />
     <Compile Include="Logic\Activities\Signup.cs" />
     <Compile Include="Logic\Adapters\AppCardVerticalAdapter.cs" />
+    <Compile Include="Logic\Fragments\AppsFragment.cs" />
+    <Compile Include="Logic\Fragments\GamesFragment.cs" />
     <Compile Include="Logic\Models\AuthenticationResponse.cs" />
     <Compile Include="Logic\Models\Gender.cs" />
     <Compile Include="Logic\Models\User.cs" />
@@ -82,9 +84,16 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\anim\slide_apps_to_games.xml" />
+    <AndroidResource Include="Resources\anim\slide_games_to_apps.xml" />
     <AndroidResource Include="Resources\layout\activity_main.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\apps_fragment.xml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\games_fragment.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\ic_launcher_background.xml" />
     <AndroidResource Include="Resources\values\strings.xml" />
@@ -146,8 +155,6 @@
   <ItemGroup>
     <Folder Include="Logic\Fragments\" />
     <Folder Include="Logic\Views\" />
-    <Folder Include="Resources\layout\fragments\" />
-    <Folder Include="Resources\layout\Views\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\dr_bgApps.xml" />
