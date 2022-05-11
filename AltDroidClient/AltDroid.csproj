@@ -124,7 +124,7 @@
     <PackageReference Include="Xamarin.AndroidX.Fragment">
       <Version>1.4.1.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.5.0.2" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.6.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
   </ItemGroup>
   <ItemGroup>
