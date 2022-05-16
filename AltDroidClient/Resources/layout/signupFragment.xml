@@ -123,11 +123,13 @@
             android:id="@+id/signup_btnSignup"
             android:layout_width="128dp"
             android:layout_height="64dp"
+            android:backgroundTint="@color/blue"
             android:text="Sign Up"/>
         <Button
             android:id="@+id/signup_btnLogin"
             android:layout_width="96dp"
             android:layout_height="48dp"
+            android:backgroundTint="@color/orange"
             android:text="Login"/>
 
     </LinearLayout>
