@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:id="@+id/linearLayout1" >
+    <LinearLayout
+        android:background="@drawable/rounded_rectangle"
+        android:padding="15dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:minWidth="100dp"
+        android:minHeight="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/GooglePlayLogo"
+            android:contentDescription="Logotype of the Application"/>
+        <TextView
+            android:text="Login"
+            android:textSize="32sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1" />
+
+        <TextView
+            android:layout_marginTop="40dp"
+            android:text="Email"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2" />
+        <EditText
+            android:inputType="textEmailAddress"
+            android:layout_width="256dp"
+            android:layout_height="64dp"
+            android:textColor="@color/white"
+            
+            android:id="@+id/login_emailInput" />
+        <TextView
+            android:layout_marginTop="40dp"
+            android:text="Password"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3" />
+        <EditText
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:layout_width="256dp"
+            android:layout_height="64dp"
+            android:id="@+id/login_passwordInput" />
+        
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="128dp"
+            android:layout_height="64dp"
+            android:text="Login"/>
+        <Button
+            android:id="@+id/btnSignup"
+            android:layout_width="128dp"
+            android:layout_height="64dp"
+            android:text="Sign Up"/>
+
+    </LinearLayout>
+</LinearLayout>

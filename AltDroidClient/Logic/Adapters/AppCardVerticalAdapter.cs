@@ -8,70 +8,54 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AndroidX.RecyclerView.Widget;
+using App1.Logic.Views;
+using App1.Models;
 
 namespace App1.Adapters
 {
-    internal class AppCardVerticalAdapter : BaseAdapter
+    internal class AppCardVerticalAdapter : RecyclerView.Adapter
     {
-
-        Context context;
-
-        public AppCardVerticalAdapter(Context context)
+        public List<AppToGet> apps;
+        public AppCardVerticalAdapter(List<AppToGet> _apps)
         {
-            this.context = context;
+            apps = _apps;
         }
+        
 
-
-        public override Java.Lang.Object GetItem(int position)
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            return position;
-        }
+            View item = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.appVerticalCard,parent,false);
 
-        public override long GetItemId(int position)
-        {
-            return position;
-        }
+            ImageView image = item.FindViewById<ImageView>(Resource.Id.appVertCard_MainImage);
+            TextView Title = item.FindViewById<TextView>(Resource.Id.appVertCard_Title);
+            TextView Publisher = item.FindViewById<TextView>(Resource.Id.appVertCard_Publisher);
+            TextView Rating = item.FindViewById<TextView>(Resource.Id.appVertCard_Rating);
 
-        public override View GetView(int position, View convertView, ViewGroup parent)
-        {
-            var view = convertView;
-            AppCardVerticalAdapterViewHolder holder = null;
-
-            if (view != null)
-                holder = view.Tag as AppCardVerticalAdapterViewHolder;
-
-            if (holder == null)
+            AppVerticalCardView cardView = new AppVerticalCardView(item)
             {
-                holder = new AppCardVerticalAdapterViewHolder();
-                var inflater = context.GetSystemService(Context.LayoutInflaterService).JavaCast<LayoutInflater>();
-                //replace with your item and your holder items
-                //comment back in
-                //view = inflater.Inflate(Resource.Layout.item, parent, false);
-                //holder.Title = view.FindViewById<TextView>(Resource.Id.text);
-                view.Tag = holder;
-            }
-
-
-            //fill in your items
-            //holder.Title.Text = "new text here";
-
-            return view;
+                image = image,
+                Title = Title,
+                Publisher = Publisher,
+                Rating = Rating
+            };
+            
+            return cardView;
         }
-
-        //Fill in cound here, currently 0
-        public override int Count
+        
+        public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            get
-            {
-                return 0;
-            }
+            AppVerticalCardView cardViewHolder = holder as AppVerticalCardView;
+            cardViewHolder.Title.Text = apps[position].title;
+            cardViewHolder.Publisher.Text = apps[position].developer.devName;
+            cardViewHolder.Rating.Text = apps[position].ratingAverage.ToString();
+            cardViewHolder.image.SetImageResource(Resource.Drawable.trypsterLogo);
         }
 
+        public override int ItemCount
+        {
+            get { return apps.Count; }
+        }
     }
-
-    internal class AppCardVerticalAdapterViewHolder : Java.Lang.Object
-    {
-        //Your adapter views to re-use
-        //public TextView Title { get; set; }
-    }
+    
 }
