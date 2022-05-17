@@ -18,6 +18,7 @@ namespace App1.Logic.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.AppDetails);
 
             // Create your application here
         }
