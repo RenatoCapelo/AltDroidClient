@@ -14,5 +14,6 @@ namespace App1.Models
         public int versionCode { get; set; }
         public string versionName { get; set; }
         public double ratingAverage { get; set; }
+        public string fileName { get; set; }
     }
 }
