@@ -12,6 +12,7 @@ using System;
 using App1.Logic.Fragments;
 using Xamarin.Essentials;
 using static Android.Animation.ValueAnimator;
+
 using Fragment = AndroidX.Fragment.App.Fragment;
 using System.IdentityModel.Tokens.Jwt;
 

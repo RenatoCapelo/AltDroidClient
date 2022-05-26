@@ -11,6 +11,8 @@ using App1.Adapters;
 using App1.Models;
 using App1.Logic.Models;
 using App1.Logic.Adapters;
+using Android.Content;
+using App1.Logic.Activities;
 
 namespace App1.Logic.Fragments
 {
@@ -20,19 +22,19 @@ namespace App1.Logic.Fragments
         private List<AppToGet> featuredAppsList;
         private RecyclerView rv_featuredApps;
         private RecyclerView.LayoutManager lm_featuredApps;
-        private RecyclerView.Adapter a_featuredApps;
+        private AppCardVerticalAdapter a_featuredApps;
 
 
         private List<AppToGet> bestRatedAppsList;
         private RecyclerView rv_bestRatedApps;
         private RecyclerView.LayoutManager lm_bestApps;
-        private RecyclerView.Adapter a_bestApps;
+        private AppCardHorizontalAdapter a_bestApps;
 
 
         private List<AppToGet> newAppsList;
         private RecyclerView rv_newApps;
         private RecyclerView.LayoutManager lm_newApps;
-        private RecyclerView.Adapter a_newApps;
+        private AppCardVerticalAdapter a_newApps;
         public override void OnCreate(Bundle savedInstanceState)
         {
             featuredAppsList = new List<AppToGet>();
@@ -40,11 +42,23 @@ namespace App1.Logic.Fragments
             newAppsList = new List<AppToGet>();
 
             a_featuredApps = new AppCardVerticalAdapter(this.featuredAppsList);
+            a_featuredApps.onItemClick += onItemClick;
+
             a_bestApps = new AppCardHorizontalAdapter(this.bestRatedAppsList);
+            a_bestApps.onItemClick += onItemClick;
             a_newApps = new AppCardVerticalAdapter(this.newAppsList);
+            a_newApps.onItemClick += onItemClick;
             base.OnCreate(savedInstanceState);
             
         }
+
+        private void onItemClick(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(Context, typeof(AppDetails_Activity));
+            intent.PutExtra("app", JsonConvert.SerializeObject(sender));
+            this.StartActivity(intent);
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             GetFeaturedApps();

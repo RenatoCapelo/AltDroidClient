@@ -7,6 +7,7 @@ using Android.Widget;
 using AndroidX.RecyclerView.Widget;
 using App1.Logic.Views;
 using App1.Models;
+using Square.Picasso;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,10 @@ using System.Text;
 
 namespace App1.Logic.Adapters
 {
-    internal class AppCardHorizontalAdapter : RecyclerView.Adapter
+    public class AppCardHorizontalAdapter : RecyclerView.Adapter
     {
         public List<AppToGet> apps;
+        public event EventHandler onItemClick;
         public AppCardHorizontalAdapter(List<AppToGet> _apps)
         {
             apps = _apps;
@@ -46,10 +48,23 @@ namespace App1.Logic.Adapters
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             AppHorizontalCardView cardViewHolder = holder as AppHorizontalCardView;
+            holder.ItemView.Click += (o, e) =>
+            {
+                var item = apps[position];
+                onItemClick.Invoke(item, e);
+            };
             cardViewHolder.Title.Text = apps[position].title;
             cardViewHolder.Category.Text = apps[position].applicationCategory.name;
             cardViewHolder.Rating.Text = $"#{(position+1).ToString()}";
-            cardViewHolder.image.SetImageResource(Resource.Drawable.trypsterLogo);
+            cardViewHolder.image.SetImageResource(Resource.Drawable.noImage);
+            if (apps[position].Icon.HasValue)
+            {
+                Picasso
+                .Get()
+                .Load($"https://api.appstore.renatoventura.pt/storage/apps/{apps[position].developer.devGuid}/{apps[position].applicationGuid}/photos/{apps[position].Icon}.png")
+                .Error(Resource.Drawable.noImage)
+                .Into(cardViewHolder.image);
+            }
         }
 
         public override int ItemCount

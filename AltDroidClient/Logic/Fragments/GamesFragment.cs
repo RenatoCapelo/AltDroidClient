@@ -1,11 +1,14 @@
-﻿using Android.OS;
+﻿using Android.Content;
+using Android.OS;
 using Android.Views;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 using App1.Adapters;
+using App1.Logic.Activities;
 using App1.Logic.Adapters;
 using App1.Logic.Models;
 using App1.Models;
+using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
 
@@ -16,19 +19,19 @@ namespace App1.Logic.Fragments
         private List<AppToGet> featuredAppsList;
         private RecyclerView rv_featuredApps;
         private RecyclerView.LayoutManager lm_featuredApps;
-        private RecyclerView.Adapter a_featuredGames;
+        private AppCardVerticalAdapter a_featuredGames;
 
 
         private List<AppToGet> bestRatedGamesList;
         private RecyclerView rv_bestRatedGames;
         private RecyclerView.LayoutManager lm_bestGames;
-        private RecyclerView.Adapter a_bestGames;
+        private AppCardHorizontalAdapter a_bestGames;
 
 
         private List<AppToGet> newGamesList;
         private RecyclerView rv_newGames;
         private RecyclerView.LayoutManager lm_newGames;
-        private RecyclerView.Adapter a_newGames;
+        private AppCardVerticalAdapter a_newGames;
         public override void OnCreate(Bundle savedInstanceState)
         {
             featuredAppsList = new List<AppToGet>();
@@ -36,10 +39,22 @@ namespace App1.Logic.Fragments
             newGamesList = new List<AppToGet>();
 
             a_featuredGames = new AppCardVerticalAdapter(this.featuredAppsList);
+            a_featuredGames.onItemClick += onItemClick;
+
             a_bestGames = new AppCardHorizontalAdapter(this.bestRatedGamesList);
+            a_bestGames.onItemClick += onItemClick;
+
             a_newGames = new AppCardVerticalAdapter(this.newGamesList);
+            a_newGames.onItemClick += onItemClick;
+
             base.OnCreate(savedInstanceState);
 
+        }
+        private void onItemClick(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(Context, typeof(AppDetails_Activity));
+            intent.PutExtra("app", JsonConvert.SerializeObject(sender));
+            this.StartActivity(intent);
         }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
