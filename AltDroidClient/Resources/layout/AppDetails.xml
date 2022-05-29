@@ -11,6 +11,7 @@
         android:orientation="horizontal"
         android:background="@color/greenishBlue">
         <ImageView
+            android:id="@+id/appDetails_backArrow"
             android:layout_weight="5"
             android:padding="10dp"
             android:layout_width="match_parent"
@@ -28,6 +29,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/darkGreen">
+        <!-- Upper Div -->
         <LinearLayout
             android:layout_weight="3"
             android:layout_width="match_parent"
@@ -64,12 +66,16 @@
                     android:layout_height="match_parent"/>
                 </LinearLayout>
         </LinearLayout>
+        <!-- Content Div -->
         <LinearLayout
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/tworoundedcorners_rectangle">
+            android:background="@drawable/tworoundedcorners_rectangle"
+            android:orientation="vertical">
+            <!-- Classificação -->
             <LinearLayout
+                android:layout_weight="5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -115,6 +121,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
             </LinearLayout>
+            <!-- Fotos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3.5"
+                android:background="@drawable/bordertopbottom">
+                <androidx.recyclerview.widget.RecyclerView
+                    
+                    android:id="@+id/appDetails_Photos"
+                
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+             </LinearLayout>
+            <!-- Descrição -->
+            <LinearLayout
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:textColor="@color/white"
+                    android:textSize="24dp"
+                    android:text="Descrição"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:textColor="@color/fadedGreen"
+                    android:textSize="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars = "vertical"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -136,7 +174,7 @@
             android:backgroundTint="@color/greenishBlue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="download"/>
+            android:text="Download"/>
         <ImageView
             android:id="@+id/appDetails_Comments"
             android:src="@drawable/comment"

@@ -71,6 +71,7 @@
     <Compile Include="Logic\Activities\MainActivity.cs" />
     <Compile Include="Logic\Adapters\AppCardHorizontalAdapter.cs" />
     <Compile Include="Logic\Adapters\AppCardVerticalAdapter.cs" />
+    <Compile Include="Logic\Events\DownloadEventArgs.cs" />
     <Compile Include="Logic\Fragments\AppsFragment.cs" />
     <Compile Include="Logic\Fragments\GamesFragment.cs" />
     <Compile Include="Logic\Fragments\LoginFragment.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Logic\Models\DeveloperToGet.cs" />
     <Compile Include="Logic\Models\Gender.cs" />
     <Compile Include="Logic\Models\User.cs" />
+    <Compile Include="Logic\Services\FileDownloader.cs" />
     <Compile Include="Logic\Views\AppHorizontalCardView.cs" />
     <Compile Include="Logic\Views\AppVerticalCardView.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -134,8 +136,14 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Flurl.Http">
+      <Version>3.2.4</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.Permissions">
+      <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="RestSharp">
       <Version>107.3.0</Version>
@@ -223,6 +231,14 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\noImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\borderTopBottom.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\xml\file_paths.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
