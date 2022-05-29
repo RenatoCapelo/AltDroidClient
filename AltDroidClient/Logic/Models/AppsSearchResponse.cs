@@ -4,13 +4,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using App1.Models;
+using Altdroid.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace App1.Logic.Models
+namespace Altdroid.Logic.Models
 {
     public class AppsSearchResponse
     {

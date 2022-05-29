@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App1.Models
+namespace Altdroid.Models
 {
     public class DeveloperToGet
     {

@@ -9,11 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AndroidX.RecyclerView.Widget;
-using App1.Logic.Views;
-using App1.Models;
+using Altdroid.Logic.Views;
+using Altdroid.Models;
 using Square.Picasso;
 
-namespace App1.Adapters
+namespace Altdroid.Adapters
 {
     public class AppCardVerticalAdapter : RecyclerView.Adapter
     {

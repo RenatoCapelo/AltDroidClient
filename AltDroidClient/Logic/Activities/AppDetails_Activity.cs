@@ -5,8 +5,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using App1.Models;
-using App1.Logic.Services;
+using Altdroid.Models;
+using Altdroid.Logic.Services;
 using Newtonsoft.Json;
 using Square.Picasso;
 using System;
@@ -19,8 +19,9 @@ using Plugin.Permissions.Abstractions;
 using System.IO;
 using AndroidX.Core.Content;
 using Xamarin.Essentials;
+using Android.Text.Method;
 
-namespace App1.Logic.Activities
+namespace Altdroid.Logic.Activities
 {
     [Activity(Label = "AppDetails_Activity",ScreenOrientation =Android.Content.PM.ScreenOrientation.Portrait)]
     public class AppDetails_Activity : AppCompatActivity
@@ -29,6 +30,7 @@ namespace App1.Logic.Activities
 
         private ImageView btnBack;
         private TextView title;
+        private TextView description;
         private TextView price;
         private ImageView logo;
         private Button btnDownload;
@@ -48,6 +50,8 @@ namespace App1.Logic.Activities
             title = FindViewById<TextView>(Resource.Id.appDetails_Title);
             price = FindViewById<TextView>(Resource.Id.appDetails_Price);
             logo = FindViewById<ImageView>(Resource.Id.appDetails_logo);
+            description = FindViewById<TextView>(Resource.Id.appDetails_Description);
+            description.MovementMethod = new ScrollingMovementMethod();
             btnDownload = FindViewById<Button>(Resource.Id.appDetails_Download);
             btnDownload.Click += BtnDownload_Click;
 

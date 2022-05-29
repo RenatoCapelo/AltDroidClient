@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace App1.Models
+namespace Altdroid.Models
 {
     internal class User
     {

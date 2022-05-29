@@ -6,17 +6,17 @@ using Android.OS;
 using Android.Runtime;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using App1.Activities;
+using Altdroid.Activities;
 using Java.Interop;
 using System;
-using App1.Logic.Fragments;
+using Altdroid.Logic.Fragments;
 using Xamarin.Essentials;
 using static Android.Animation.ValueAnimator;
 
 using Fragment = AndroidX.Fragment.App.Fragment;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace App1
+namespace Altdroid
 {
     [Activity(Label = "@string/app_name",
         Theme = "@style/Theme.AppCompat.DayNight.NoActionBar",

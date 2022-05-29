@@ -7,14 +7,14 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
-using App1.Adapters;
-using App1.Models;
-using App1.Logic.Models;
-using App1.Logic.Adapters;
+using Altdroid.Adapters;
+using Altdroid.Models;
+using Altdroid.Logic.Models;
+using Altdroid.Logic.Adapters;
 using Android.Content;
-using App1.Logic.Activities;
+using Altdroid.Logic.Activities;
 
-namespace App1.Logic.Fragments
+namespace Altdroid.Logic.Fragments
 {
     
     public class AppsFragment:Fragment

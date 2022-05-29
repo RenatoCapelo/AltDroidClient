@@ -4,7 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using App1.Logic.Events;
+using Altdroid.Logic.Events;
 using Flurl.Http;
 using RestSharp;
 using System;
@@ -18,7 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace App1.Logic.Services
+namespace Altdroid.Logic.Services
 {
     internal class FileDownloader
     {

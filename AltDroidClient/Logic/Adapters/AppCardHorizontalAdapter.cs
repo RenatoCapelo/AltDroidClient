@@ -5,15 +5,15 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
-using App1.Logic.Views;
-using App1.Models;
+using Altdroid.Logic.Views;
+using Altdroid.Models;
 using Square.Picasso;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace App1.Logic.Adapters
+namespace Altdroid.Logic.Adapters
 {
     public class AppCardHorizontalAdapter : RecyclerView.Adapter
     {

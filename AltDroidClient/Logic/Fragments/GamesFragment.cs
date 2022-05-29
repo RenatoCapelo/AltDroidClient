@@ -3,16 +3,16 @@ using Android.OS;
 using Android.Views;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
-using App1.Adapters;
-using App1.Logic.Activities;
-using App1.Logic.Adapters;
-using App1.Logic.Models;
-using App1.Models;
+using Altdroid.Adapters;
+using Altdroid.Logic.Activities;
+using Altdroid.Logic.Adapters;
+using Altdroid.Logic.Models;
+using Altdroid.Models;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
 
-namespace App1.Logic.Fragments
+namespace Altdroid.Logic.Fragments
 {
     public class GamesFragment:Fragment
     {

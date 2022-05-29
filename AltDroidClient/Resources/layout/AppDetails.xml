@@ -147,6 +147,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
                 <TextView
+                    android:id="@+id/appDetails_Description"
                     android:textColor="@color/fadedGreen"
                     android:textSize="16dp"
                     android:layout_width="match_parent"

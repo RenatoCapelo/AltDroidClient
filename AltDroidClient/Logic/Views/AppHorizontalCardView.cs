@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace App1.Logic.Views
+namespace Altdroid.Logic.Views
 {
     public class AppHorizontalCardView : RecyclerView.ViewHolder
     {

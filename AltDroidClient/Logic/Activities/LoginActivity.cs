@@ -12,11 +12,11 @@ using System.Text;
 using Xamarin.Essentials;
 using RestSharp;
 using Google.Android.Material.Snackbar;
-using App1.Models;
+using Altdroid.Models;
 using AndroidX.AppCompat.App;
-using App1.Logic.Fragments;
+using Altdroid.Logic.Fragments;
 
-namespace App1.Activities
+namespace Altdroid.Activities
 {
     [Activity(Label = "Login",Theme = "@style/AppTheme",ScreenOrientation =Android.Content.PM.ScreenOrientation.Portrait)]
     public class Login : AppCompatActivity

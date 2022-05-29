@@ -2,7 +2,7 @@
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
 
-namespace App1.Logic.Views
+namespace Altdroid.Logic.Views
 {
     public class AppVerticalCardView:RecyclerView.ViewHolder
     {

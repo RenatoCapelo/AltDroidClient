@@ -12,12 +12,12 @@ using System.Text;
 using Xamarin.Essentials;
 using RestSharp;
 using Google.Android.Material.Snackbar;
-using App1.Models;
+using Altdroid.Models;
 using AndroidX.AppCompat.App;
-using App1.Logic.Fragments;
+using Altdroid.Logic.Fragments;
 using Newtonsoft.Json;
 
-namespace App1.Logic.Fragments
+namespace Altdroid.Logic.Fragments
 {
     public class LoginFragment : Fragment
     {
