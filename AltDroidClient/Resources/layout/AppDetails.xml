@@ -137,6 +137,8 @@
             <!-- Descrição -->
             <LinearLayout
                 android:layout_weight="4"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -145,7 +147,7 @@
                     android:textSize="24dp"
                     android:text="Descrição"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/appDetails_Description"
                     android:textColor="@color/fadedGreen"

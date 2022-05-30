@@ -20,6 +20,10 @@ using System.IO;
 using AndroidX.Core.Content;
 using Xamarin.Essentials;
 using Android.Text.Method;
+using AndroidX.RecyclerView.Widget;
+using RestSharp;
+using App1.Logic.Models;
+using App1.Logic.Adapters;
 
 namespace Altdroid.Logic.Activities
 {
@@ -34,7 +38,11 @@ namespace Altdroid.Logic.Activities
         private TextView price;
         private ImageView logo;
         private Button btnDownload;
+        private RecyclerView rv_Photos;
+        private RecyclerView.LayoutManager lm_Photos;
+        private ImageViewAdapter a_Photos;
 
+        private List<string> _photos;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -51,12 +59,21 @@ namespace Altdroid.Logic.Activities
             price = FindViewById<TextView>(Resource.Id.appDetails_Price);
             logo = FindViewById<ImageView>(Resource.Id.appDetails_logo);
             description = FindViewById<TextView>(Resource.Id.appDetails_Description);
+            rv_Photos = FindViewById<RecyclerView>(Resource.Id.appDetails_Photos);
+            _photos = new List<string>();
+            a_Photos = new ImageViewAdapter(_photos);
+            lm_Photos = new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false);
+            rv_Photos.SetLayoutManager(lm_Photos);
+            rv_Photos.SetAdapter(a_Photos);
+            getImages();
+            description = FindViewById<TextView>(Resource.Id.appDetails_Description);
             description.MovementMethod = new ScrollingMovementMethod();
             btnDownload = FindViewById<Button>(Resource.Id.appDetails_Download);
             btnDownload.Click += BtnDownload_Click;
 
             title.Text = app.title;
             price.Text = "Gratuito";
+            description.Text = app.description;
             logo.SetImageResource(Resource.Drawable.noImage);
             if(app.Icon.HasValue)
             {
@@ -72,6 +89,8 @@ namespace Altdroid.Logic.Activities
 
         private void BtnDownload_Click(object sender, EventArgs e)
         {
+            ((Button)sender).Enabled = false;
+            ((Button)sender).Text = "A Descarregar...";
             var downloader = new FileDownloader();
             downloader.DownloadFile($"https://api.appstore.renatoventura.pt/storage/apps/{app.developer.devGuid}/{app.applicationGuid}/{app.fileName}",$"{app.applicationGuid}");
             downloader.OnFileDownloaded += Downloader_OnFileDownloaded;
@@ -105,7 +124,18 @@ namespace Altdroid.Logic.Activities
                 Toast.MakeText(this,"There was an error downloading the app", ToastLength.Long).Show();
             }
         }
-
+        private async void getImages()
+        {
+            using (var client = new RestClient("https://api.appstore.renatoventura.pt"))
+            {
+                var request = new RestRequest($"App/Photos/{app.applicationGuid}/3",Method.Get);
+                var res = await client.ExecuteAsync<List<Photos>>(request);
+                _photos.Clear();
+                _photos.AddRange(res.Data.Select(o => $"/apps/{app.developer.devGuid}/{app.applicationGuid}/photos/{o.photo}.png").ToList());
+                if (_photos.Count == 0) _photos.Add("/static/noImage.png");
+                a_Photos.NotifyDataSetChanged();
+            }
+        }
         private void BtnBack_Click(object sender, EventArgs e)
         {
             this.Finish();

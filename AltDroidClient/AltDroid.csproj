@@ -75,6 +75,7 @@
     <Compile Include="Logic\Activities\MainActivity.cs" />
     <Compile Include="Logic\Adapters\AppCardHorizontalAdapter.cs" />
     <Compile Include="Logic\Adapters\AppCardVerticalAdapter.cs" />
+    <Compile Include="Logic\Adapters\ImageViewAdapter.cs" />
     <Compile Include="Logic\Events\DownloadEventArgs.cs" />
     <Compile Include="Logic\Fragments\AppsFragment.cs" />
     <Compile Include="Logic\Fragments\GamesFragment.cs" />
@@ -87,10 +88,12 @@
     <Compile Include="Logic\Models\AuthenticationResponse.cs" />
     <Compile Include="Logic\Models\DeveloperToGet.cs" />
     <Compile Include="Logic\Models\Gender.cs" />
+    <Compile Include="Logic\Models\Photos.cs" />
     <Compile Include="Logic\Models\User.cs" />
     <Compile Include="Logic\Services\FileDownloader.cs" />
     <Compile Include="Logic\Views\AppHorizontalCardView.cs" />
     <Compile Include="Logic\Views\AppVerticalCardView.cs" />
+    <Compile Include="Logic\Views\imageView.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -243,6 +246,14 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\xml\file_paths.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\imageView.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
