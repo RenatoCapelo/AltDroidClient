@@ -93,6 +93,7 @@
     <Compile Include="Logic\Services\FileDownloader.cs" />
     <Compile Include="Logic\Views\AppHorizontalCardView.cs" />
     <Compile Include="Logic\Views\AppVerticalCardView.cs" />
+    <Compile Include="Logic\Views\SpacingDecorator.cs" />
     <Compile Include="Logic\Views\imageView.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

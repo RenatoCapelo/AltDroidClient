@@ -13,6 +13,7 @@ using Altdroid.Logic.Models;
 using Altdroid.Logic.Adapters;
 using Android.Content;
 using Altdroid.Logic.Activities;
+using Altdroid.Logic.Views;
 
 namespace Altdroid.Logic.Fragments
 {
@@ -75,10 +76,17 @@ namespace Altdroid.Logic.Fragments
             lm_newApps = new LinearLayoutManager(Context, LinearLayoutManager.Horizontal, false);
             lm_bestApps = new LinearLayoutManager(Context, LinearLayoutManager.Vertical, false);
 
+            SpacingDecorator verticalDecorator = new SpacingDecorator(5,5);
+            SpacingDecorator horizontalDecorator = new SpacingDecorator(0, 0, 5, 5);
+
             rv_featuredApps.SetLayoutManager(lm_featuredApps);
             rv_newApps.SetLayoutManager(lm_newApps);
             rv_bestRatedApps.SetLayoutManager(lm_bestApps);
             
+            rv_featuredApps.AddItemDecoration(horizontalDecorator);
+            rv_bestRatedApps.AddItemDecoration (verticalDecorator);
+            rv_newApps.AddItemDecoration(horizontalDecorator);
+
             rv_featuredApps.SetAdapter(a_featuredApps);
             rv_newApps.SetAdapter(a_newApps);
             rv_bestRatedApps.SetAdapter(a_bestApps);

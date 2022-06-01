@@ -61,11 +61,11 @@ namespace Altdroid.Logic.Fragments
             GetFeaturedApps();
             GetBestRatedApps();
             GetNewApps();
-            View view = inflater.Inflate(Resource.Layout.apps_fragment, container, false);
+            View view = inflater.Inflate(Resource.Layout.games_fragment, container, false);
 
-            rv_featuredApps = view!.FindViewById<RecyclerView>(Resource.Id.apps_FeaturedAppsRecyclerView);
-            rv_newGames = view!.FindViewById<RecyclerView>(Resource.Id.apps_NewAppsRecyclerView);
-            rv_bestRatedGames = view!.FindViewById<RecyclerView>(Resource.Id.apps_TopRatedRecyclerView);
+            rv_featuredApps = view!.FindViewById<RecyclerView>(Resource.Id.games_FeaturedAppsRecyclerView);
+            rv_newGames = view!.FindViewById<RecyclerView>(Resource.Id.games_NewAppsRecyclerView);
+            rv_bestRatedGames = view!.FindViewById<RecyclerView>(Resource.Id.games_TopRatedRecyclerView);
 
 
             lm_featuredApps = new LinearLayoutManager(Context, LinearLayoutManager.Horizontal, false);

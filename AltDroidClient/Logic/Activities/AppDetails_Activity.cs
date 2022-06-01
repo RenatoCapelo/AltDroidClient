@@ -24,6 +24,7 @@ using AndroidX.RecyclerView.Widget;
 using RestSharp;
 using App1.Logic.Models;
 using App1.Logic.Adapters;
+using Altdroid.Logic.Views;
 
 namespace Altdroid.Logic.Activities
 {
@@ -65,6 +66,7 @@ namespace Altdroid.Logic.Activities
             lm_Photos = new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false);
             rv_Photos.SetLayoutManager(lm_Photos);
             rv_Photos.SetAdapter(a_Photos);
+            rv_Photos.AddItemDecoration(new SpacingDecorator(0, 0, 5, 5));
             getImages();
             description = FindViewById<TextView>(Resource.Id.appDetails_Description);
             description.MovementMethod = new ScrollingMovementMethod();
