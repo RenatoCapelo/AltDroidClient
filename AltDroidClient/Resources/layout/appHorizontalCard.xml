@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="92dp"
-    android:background="@drawable/greenishbluerectangle">
+    android:background="@drawable/greenishBlueRectangle">
     <LinearLayout
         android:layout_weight="4"
         android:layout_width="match_parent"

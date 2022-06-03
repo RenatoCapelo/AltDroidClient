@@ -18,14 +18,15 @@ namespace Altdroid.Logic.Fragments
     public class SignUpFragment : Fragment
     {
         public event EventHandler onLoginClick;
-        public EditText name;
-        public EditText email;
-        public EditText password;
-        public EditText birthday;
+        public EditText editTextname;
+        public EditText editTextEmail;
+        public EditText editTextPassword;
+        public EditText editTextBirthday;
         public RadioGroup gender;
 
         public Button signUp_btn;
         public Button login_btn;
+        View view;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -36,11 +37,11 @@ namespace Altdroid.Logic.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
-            View view = inflater.Inflate(Resource.Layout.signupFragment, container, false);
-            name=view.FindViewById<EditText>(Resource.Id.signup_nameInput);
-            email = view.FindViewById<EditText>(Resource.Id.signup_emailInput);
-            password = view.FindViewById<EditText>(Resource.Id.signup_passwordInput);
-            birthday = view.FindViewById<EditText>(Resource.Id.signup_dobInput);
+            view = inflater.Inflate(Resource.Layout.signupFragment, container, false);
+            editTextname=view.FindViewById<EditText>(Resource.Id.signup_nameInput);
+            editTextEmail = view.FindViewById<EditText>(Resource.Id.signup_emailInput);
+            editTextPassword = view.FindViewById<EditText>(Resource.Id.signup_passwordInput);
+            editTextBirthday = view.FindViewById<EditText>(Resource.Id.signup_dobInput);
             gender = view.FindViewById<RadioGroup>(Resource.Id.signup_Gender);
             signUp_btn = view.FindViewById<Button>(Resource.Id.signup_btnSignup);
             login_btn = view.FindViewById<Button>(Resource.Id.signup_btnLogin);
@@ -56,9 +57,38 @@ namespace Altdroid.Logic.Fragments
             onLoginClick.Invoke(sender, e);
         }
 
-        private void SignUp_btn_Click(object sender, EventArgs e)
+        private async void SignUp_btn_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            var idGender = int.Parse(view.FindViewById<RadioButton>(gender.CheckedRadioButtonId).Tag.ToString());
+            
+            using (var client = new RestClient("https://api.appstore.renatoventura.pt"))
+            {
+                var request = new RestRequest("user", Method.Post);
+                request.AddBody(new
+                {
+                    email = editTextEmail.Text,
+                    password = editTextPassword.Text,
+                    name = editTextname.Text,
+                    dob = DateTime.Parse(editTextBirthday.Text),
+                    idGender
+                }, "application/json");
+                try
+                {
+                    var res = await client.ExecutePostAsync(request);
+                    if (res.IsSuccessful)
+                    {
+                        onLoginClick.Invoke(sender, e);
+                    }
+                    else {
+                        Toast.MakeText(this.Context, "Please confirm all fields and try again", ToastLength.Long).Show();
+                    }
+                    
+                }
+                catch (HttpRequestException ex)
+                {
+                    Toast.MakeText(this.Context, "There was an error... Try again", ToastLength.Long).Show();
+                }
+            }
         }
     }
 }

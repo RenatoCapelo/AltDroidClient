@@ -71,12 +71,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logic\Activities\AppDetails_Activity.cs" />
+    <Compile Include="Logic\Activities\Comments_Activity.cs" />
     <Compile Include="Logic\Activities\LoginActivity.cs" />
     <Compile Include="Logic\Activities\MainActivity.cs" />
     <Compile Include="Logic\Adapters\AppCardHorizontalAdapter.cs" />
     <Compile Include="Logic\Adapters\AppCardVerticalAdapter.cs" />
     <Compile Include="Logic\Adapters\ImageViewAdapter.cs" />
     <Compile Include="Logic\Events\DownloadEventArgs.cs" />
+    <Compile Include="Logic\Fragments\SearchFragment.cs" />
+    <Compile Include="Logic\Fragments\SettingsDialogFragment.cs" />
     <Compile Include="Logic\Fragments\AppsFragment.cs" />
     <Compile Include="Logic\Fragments\GamesFragment.cs" />
     <Compile Include="Logic\Fragments\LoginFragment.cs" />
@@ -110,8 +113,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable\rectangle_slightly_rounded.xml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\threeDots.svg" />
     <AndroidResource Include="Resources\drawable\StarIcon.png" />
+    <AndroidResource Include="Resources\layout\activity_comment.xml" />
     <AndroidResource Include="Resources\layout\activity_main.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -158,6 +166,12 @@
     </PackageReference>
     <PackageReference Include="Square.Picasso">
       <Version>2.71828.0</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Licensing">
+      <Version>20.1.0.58</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfCarousel.Android">
+      <Version>20.1.0.58</Version>
     </PackageReference>
     <PackageReference Include="System.IdentityModel.Tokens.Jwt">
       <Version>6.18.0</Version>
@@ -255,6 +269,27 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_search.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\settingsDialog_Fragment.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\rectangle_slightly_rounded_semi_transparent.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\searchFragment.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

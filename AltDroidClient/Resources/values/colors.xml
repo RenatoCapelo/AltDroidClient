@@ -5,10 +5,12 @@
     <color name="colorAccent">#3498db</color>
 	<color name="blue">#27A7D8</color>
 	<color name="orange">#FF9A00</color>
-	<color name="appsBg">#84A98C</color>
-	<color name="gamesBg">#52796F</color>
-	<color name="darkGreen">#354F52</color>
-	<color name="greenishBlue">#2F3E46</color>
-	<color name="fadedGreen">#CAD2C5</color>
+	<color name="appsBg">#70A9A1</color>
+	<color name="gamesBg">#9EC1A3</color>
+	<color name="darkGreen">#40798C</color>
+	<color name="darkestGreen">#294E5A</color>
+	<color name="greenishBlue">#1F363D</color>
+	<color name="greenishBlueSemiTransparent">#DD1F363D</color>
+	<color name="fadedGreen">#CFE0C3</color>
 	<color name="white">#ffffff</color>
 </resources>

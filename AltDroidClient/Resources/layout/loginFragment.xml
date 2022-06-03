@@ -21,7 +21,7 @@
         <ImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/GooglePlayLogo"
+            android:src="@drawable/logo"
             android:contentDescription="Logotype of the Application"/>
         <TextView
             android:text="Login"
@@ -32,28 +32,25 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView1" />
 
-        <TextView
-            android:layout_marginTop="40dp"
-            android:text="Email"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2" />
+        
         <EditText
+            android:background="@drawable/greenishbluerectangle"
+            android:backgroundTint="@color/white"
+            android:padding="5dp"
+            android:layout_marginVertical="5dp"
+            android:hint="Email"
             android:inputType="textEmailAddress"
             android:layout_width="256dp"
             android:layout_height="64dp"
             android:textColor="@color/white"
-            
             android:id="@+id/login_emailInput" />
-        <TextView
-            android:layout_marginTop="40dp"
-            android:text="Password"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3" />
+        
         <EditText
+            android:background="@drawable/greenishbluerectangle"
+            android:backgroundTint="@color/white"
+            android:padding="5dp"
+            android:layout_marginVertical="5dp"
+            android:hint="Password"
             android:inputType="textPassword"
             android:textColor="@color/white"
             android:layout_width="256dp"
@@ -68,10 +65,12 @@
             android:text="Login"/>
         <Button
             android:id="@+id/btnSignup"
-            android:layout_width="128dp"
-            android:layout_height="64dp"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
             android:backgroundTint="@color/orange"
             android:text="Sign Up"/>
+
+      
 
     </LinearLayout>
 </LinearLayout>

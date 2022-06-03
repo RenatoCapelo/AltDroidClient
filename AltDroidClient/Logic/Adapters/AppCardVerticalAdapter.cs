@@ -49,11 +49,14 @@ namespace Altdroid.Adapters
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             AppVerticalCardView cardViewHolder = holder as AppVerticalCardView;
-            holder.ItemView.Click += (o, e) =>
+            if (!holder.ItemView.HasOnClickListeners)
             {
-                var item = apps[position];
-                onItemClick.Invoke(item, e);                
-            };
+                holder.ItemView.Click += (o, e) =>
+                {
+                    var item = apps[position];
+                    onItemClick.Invoke(item, e);
+                };
+            }
 
             cardViewHolder.Title.Text = apps[position].title;
             cardViewHolder.Publisher.Text = apps[position].developer.devName;

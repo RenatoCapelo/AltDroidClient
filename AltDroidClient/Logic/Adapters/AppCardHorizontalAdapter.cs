@@ -48,11 +48,14 @@ namespace Altdroid.Logic.Adapters
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             AppHorizontalCardView cardViewHolder = holder as AppHorizontalCardView;
-            holder.ItemView.Click += (o, e) =>
+            if (!holder.ItemView.HasOnClickListeners)
             {
-                var item = apps[position];
-                onItemClick.Invoke(item, e);
-            };
+                holder.ItemView.Click += (o, e) =>
+                {
+                    var item = apps[position];
+                    onItemClick.Invoke(item, e);
+                };
+            }
             cardViewHolder.Title.Text = apps[position].title;
             cardViewHolder.Category.Text = apps[position].applicationCategory.name;
             cardViewHolder.Rating.Text = $"#{(position+1).ToString()}";

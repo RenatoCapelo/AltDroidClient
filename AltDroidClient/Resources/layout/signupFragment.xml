@@ -105,15 +105,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Male"
+                    android:tag="1"
                 />
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female"/>
+                    android:text="Female"
+                    android:tag="2"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Other"/>
+                    android:text="Other"
+                    android:tag="3"/>
             </RadioGroup>
             
         </LinearLayout>

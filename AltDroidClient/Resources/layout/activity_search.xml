@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:layout_weight="10"
+        android:id="@+id/main_MainContainer"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dr_bggames"
+        android:paddingHorizontal="32dp">
+            <!--Search Box-->
+            <LinearLayout
+                android:id="@+id/main_SearchBoxContainer"
+                android:gravity="left"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:orientation="horizontal"
+                android:layout_marginVertical="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/rounded_rectangle">
+                <!--SearchInput-->
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/search_Input"
+                    android:inputType="text"
+                    android:hint="Search..."
+                    android:textColorHint="#ccc"
+                    android:textColor="#000"/>
+            </LinearLayout>
+            <!--MainContainer-->
+            <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/search_Rv" android:layout_marginBottom="16dp"/>
+</LinearLayout>

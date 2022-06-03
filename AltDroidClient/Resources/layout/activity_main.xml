@@ -53,10 +53,10 @@
                     />
             </LinearLayout>
             <!--MainContainer-->
-            <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/main_fragmentContainer"/>
+            <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/main_fragmentContainer" android:layout_marginBottom="16dp"/>
     </LinearLayout>
     <LinearLayout
-            android:layout_weight="1"
+            android:id="@+id/main_linearLayout_categories"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:orientation="horizontal"

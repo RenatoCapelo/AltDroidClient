@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/darkGreen">
+        android:background="@color/darkestGreen">
         <!-- Upper Div -->
         <LinearLayout
             android:layout_weight="3"
@@ -36,35 +36,40 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:paddingLeft="15dp">
+    
             <ImageView
-                android:id="@+id/appDetails_logo"
-                android:layout_weight="5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:src="@drawable/trypsterlogo"/>
+                    android:id="@+id/appDetails_logo"
+                    android:layout_weight="5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:src="@drawable/trypsterLogo"/>
+    
             <LinearLayout
-                android:layout_weight="2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/appDetails_Title"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:gravity="bottom"
-                    android:textSize="32sp"
-                    tools:text="Trypster"
+                    android:layout_weight="2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="8dp">
+        
                 <TextView
-                    android:id="@+id/appDetails_Price"
-                    android:layout_weight="1"
-                    android:textSize="24sp"
-                    tools:text="Gratuito"
-                    android:textColor="@color/fadedGreen"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-                </LinearLayout>
+                        android:id="@+id/appDetails_Title"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:gravity="bottom"
+                        android:textSize="32sp"
+                        tools:text="Trypster"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+        
+                <TextView
+                        android:id="@+id/appDetails_Price"
+                        android:layout_weight="1"
+                        android:textSize="24sp"
+                        tools:text="Gratuito"
+                        android:textColor="@color/fadedGreen"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+            </LinearLayout>
         </LinearLayout>
         <!-- Content Div -->
         <LinearLayout
@@ -85,34 +90,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="10dp">
-                        <TextView
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Classificação"
-                            android:textColor="@color/white"
-                            android:textSize="24dp"
-                            android:gravity="bottom"/>
+                    android:paddingHorizontal="10dp">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Classificação"
+                        android:textColor="@color/white"
+                        android:textSize="24dp"
+                        android:gravity="bottom"/>
                     <LinearLayout
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
                             <TextView
-                                android:layout_weight="1"
+                                android:layout_weight="4"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:id="@+id/appDetails_Rating"
                                 tools:text="5.0"
                                 android:textSize="36dp"
+                                android:gravity="center"
                                 android:textColor="@color/fadedGreen"
                             />
                             <ImageView
-                                android:layout_weight="1"
+                                android:padding="5dp"
+                                android:layout_weight="5"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-
+                                
                                 android:src="@drawable/staricon"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -123,16 +130,18 @@
             </LinearLayout>
             <!-- Fotos -->
             <LinearLayout
+                xmlns:carousel="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3.5"
                 android:background="@drawable/bordertopbottom">
                 <androidx.recyclerview.widget.RecyclerView
-                    
+                    android:layout_margin="0dp"
+                    android:paddingHorizontal="5dp"
                     android:id="@+id/appDetails_Photos"
-                
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
+                
              </LinearLayout>
             <!-- Descrição -->
             <LinearLayout
@@ -164,7 +173,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:background="@color/gamesBg">
+        android:background="@color/darkGreen">
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"

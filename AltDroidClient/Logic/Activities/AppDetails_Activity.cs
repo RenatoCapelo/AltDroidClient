@@ -25,17 +25,23 @@ using RestSharp;
 using App1.Logic.Models;
 using App1.Logic.Adapters;
 using Altdroid.Logic.Views;
+using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
+using Android.Content.PM;
 
 namespace Altdroid.Logic.Activities
 {
     [Activity(Label = "AppDetails_Activity",ScreenOrientation =Android.Content.PM.ScreenOrientation.Portrait)]
     public class AppDetails_Activity : AppCompatActivity
     {
+
+        const int INSTALL_REQUEST_CODE = 123;
+
         AppToGet app;
 
         private ImageView btnBack;
         private TextView title;
         private TextView description;
+        private TextView rating;
         private TextView price;
         private ImageView logo;
         private Button btnDownload;
@@ -49,15 +55,13 @@ namespace Altdroid.Logic.Activities
             base.OnCreate(savedInstanceState);
             app = JsonConvert.DeserializeObject<AppToGet>(Intent.GetStringExtra("app"));
             SetContentView(Resource.Layout.AppDetails);
-            var status = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
-            while (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
-            {
-                status = await CrossPermissions.Current.RequestPermissionAsync<StoragePermission>();
-            }
+            askPermission();
             btnBack = FindViewById<ImageView>(Resource.Id.appDetails_backArrow);
             btnBack.Click += BtnBack_Click;
             title = FindViewById<TextView>(Resource.Id.appDetails_Title);
             price = FindViewById<TextView>(Resource.Id.appDetails_Price);
+            rating = FindViewById<TextView>(Resource.Id.appDetails_Rating);
+            rating.Text = app.ratingAverage.ToString();
             logo = FindViewById<ImageView>(Resource.Id.appDetails_logo);
             description = FindViewById<TextView>(Resource.Id.appDetails_Description);
             rv_Photos = FindViewById<RecyclerView>(Resource.Id.appDetails_Photos);
@@ -71,7 +75,15 @@ namespace Altdroid.Logic.Activities
             description = FindViewById<TextView>(Resource.Id.appDetails_Description);
             description.MovementMethod = new ScrollingMovementMethod();
             btnDownload = FindViewById<Button>(Resource.Id.appDetails_Download);
-            btnDownload.Click += BtnDownload_Click;
+            var exists = packageExists(app.packageName);
+            if (exists)
+            {
+                btnDownload.Enabled = false;
+                btnDownload.Text = "Descarregado";
+            }
+            else
+                btnDownload.Click += BtnDownload_Click;
+
 
             title.Text = app.title;
             price.Text = "Gratuito";
@@ -83,26 +95,34 @@ namespace Altdroid.Logic.Activities
                 Picasso
                     .Get()
                     .Load(url)
-                    .Error(Resource.Drawable.trypsterLogo)
+                    .Error(Resource.Drawable.noImage)
                     .Into(logo);
             }
             // Create your application here
         }
 
-        private void BtnDownload_Click(object sender, EventArgs e)
+        private async void BtnDownload_Click(object sender, EventArgs e)
         {
-            ((Button)sender).Enabled = false;
-            ((Button)sender).Text = "A Descarregar...";
-            var downloader = new FileDownloader();
-            downloader.DownloadFile($"https://api.appstore.renatoventura.pt/storage/apps/{app.developer.devGuid}/{app.applicationGuid}/{app.fileName}",$"{app.applicationGuid}");
-            downloader.OnFileDownloaded += Downloader_OnFileDownloaded;
+            var status = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
+            if(status != PermissionStatus.Granted)
+                askPermission();
+            else
+            {
+                ((Button)sender).Enabled = false;
+                ((Button)sender).Text = "A Descarregar...";
+                var downloader = new FileDownloader();
+                downloader.DownloadFile($"https://api.appstore.renatoventura.pt/storage/apps/{app.developer.devGuid}/{app.applicationGuid}/{app.fileName}",$"{app.applicationGuid}");
+                downloader.OnFileDownloaded += Downloader_OnFileDownloaded;
+            }
         }
 
         private void Downloader_OnFileDownloaded(object sender, Events.DownloadEventArgs e)
         {
             if (e.FileSaved)
             {
-                Intent appInstall = new Intent(Intent.ActionView);
+                
+
+                //Intent appInstall = new Intent(Intent.ActionView);
                 try
                 {
                     var pathToInstall = new Java.IO.File(Android.App.Application.Context.GetExternalFilesDir("").AbsolutePath, app.applicationGuid.ToString());
@@ -111,19 +131,49 @@ namespace Altdroid.Logic.Activities
                     Android.Net.Uri apkUri = AndroidX.Core.Content.FileProvider.GetUriForFile(Application.Context,
                     AppInfo.PackageName + ".provider",
                     toInstall);
-                    appInstall.SetDataAndType(apkUri, "application/vnd.android.package-archive");
-                    appInstall.SetFlags(ActivityFlags.GrantReadUriPermission);
-                    StartActivity(appInstall);
-
+                    //appInstall.SetDataAndType(apkUri, "application/vnd.android.package-archive");
+                    //appInstall.SetFlags(ActivityFlags.GrantReadUriPermission);
+                    //StartActivity(appInstall);
+                    Intent intent = new Intent(Intent.ActionInstallPackage);
+                    intent.SetDataAndType(apkUri, "application/vnd.android.package-archive");
+                    intent.SetFlags(ActivityFlags.GrantReadUriPermission);
+                    intent.PutExtra(Intent.ExtraReturnResult, true);
+                    StartActivityForResult(intent, INSTALL_REQUEST_CODE);
                 }
-                catch(Exception ex)
-                { 
+                catch (Exception)
+                {
+                    Toast.MakeText(this,"There was an error downloading the app", ToastLength.Long).Show();
                 }
-                Toast.MakeText(this, "The app was downloaded!", ToastLength.Long).Show();
             }
             else
             {
                 Toast.MakeText(this,"There was an error downloading the app", ToastLength.Long).Show();
+            }
+        }
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            switch (requestCode)
+            {
+                case INSTALL_REQUEST_CODE:
+                    switch (resultCode)
+                    {
+                        case Result.Ok:
+                            btnDownload.Text = "Instalado!";
+                            Toast.MakeText(this, "The app was instaled!", ToastLength.Long).Show();
+                            break;
+                        case Result.Canceled:
+                            btnDownload.Text = "Download";
+                            btnDownload.Enabled = true;
+                            Toast.MakeText(this, "You canceled the instalation :(", ToastLength.Long).Show();
+                            break;
+                        case Result.FirstUser:
+                            btnDownload.Text = "Download";
+                            btnDownload.Enabled = true;
+                            Toast.MakeText(this, "There was an error during the instalation :(", ToastLength.Long).Show();
+                            break;
+                    }
+                    break;
             }
         }
         private async void getImages()
@@ -140,7 +190,26 @@ namespace Altdroid.Logic.Activities
         }
         private void BtnBack_Click(object sender, EventArgs e)
         {
-            this.Finish();
+            base.OnBackPressed();
+        }
+
+        private async void askPermission()
+        {
+                await CrossPermissions.Current.RequestPermissionAsync<StoragePermission>();
+        }
+
+        public bool packageExists(String targetPackage)
+        {
+            PackageManager pm = this.PackageManager;
+            try
+            {
+                PackageInfo info = pm.GetPackageInfo(targetPackage, PackageInfoFlags.MetaData);
+            }
+            catch (PackageManager.NameNotFoundException e)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

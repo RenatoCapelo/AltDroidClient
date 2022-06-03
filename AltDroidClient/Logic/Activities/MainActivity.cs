@@ -15,6 +15,8 @@ using static Android.Animation.ValueAnimator;
 
 using Fragment = AndroidX.Fragment.App.Fragment;
 using System.IdentityModel.Tokens.Jwt;
+using Altdroid.Logic.Activities;
+using FragmentTransaction = AndroidX.Fragment.App.FragmentTransaction;
 
 namespace Altdroid
 {
@@ -31,16 +33,20 @@ namespace Altdroid
         Button btnApps;
         Button btnGames;
         LinearLayout mainContainer;
+        private Button settings;
 
         private Fragment currentFragment;
         private AppsFragment _appsFragment;
         private GamesFragment _gamesFragment;
+        private SearchFragment _searchFragment;
+        private LinearLayout _llCategories;
 
         private EditText _searchTextBox;
         
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
+            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjUwMjEzQDMyMzAyZTMxMmUzMGJsWGNYekpZU3RNdjY5Q1IyQ1ZqZU9tSHBMSTl1cmszc0NXcldLejhMOG89");
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             //await SecureStorage.SetAsync("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTAyMjAwMzUuMCwiR3VpZCI6ImFjNDUyM2EyLTJhMzMtNDMyOS1hMWE1LTA4MjRkMDhkNDk5MSIsIk5hbWUiOiJSZW5hdG8iLCJyb2xlIjoiRGV2In0.kbRZFlBZLBi2Qd1fMh5U9Mrpox0PTvWZ7da6BgnP4ihtqReEwNHw8_vowWE9GG72WfcfRULxcmDp7iNpUE6LNQ");
@@ -66,10 +72,16 @@ namespace Altdroid
             btnApps = FindViewById<Button>(Resource.Id.main_btnApps);
             btnGames = FindViewById<Button>(Resource.Id.main_btnGames);
             mainContainer = FindViewById<LinearLayout>(Resource.Id.main_MainContainer);
-            _searchTextBox = FindViewById<EditText>(Resource.Id.main_searchTextInput);
+            settings = FindViewById<Button>(Resource.Id.main_btnProfile);
+            _llCategories = FindViewById<LinearLayout>(Resource.Id.main_linearLayout_categories);
             _appsFragment = new AppsFragment();
             _gamesFragment = new GamesFragment();
+            _searchFragment = new SearchFragment();
+            
+            _searchTextBox = FindViewById<EditText>(Resource.Id.main_searchTextInput);
             var trans = SupportFragmentManager.BeginTransaction();
+            trans.Add(Resource.Id.main_fragmentContainer, _searchFragment, "SearchFragment");
+            trans.Hide(_searchFragment);
             trans.Add(Resource.Id.main_fragmentContainer, _gamesFragment, "GamesFragment");
             trans.Hide(_gamesFragment);
             trans.Add(Resource.Id.main_fragmentContainer, _appsFragment, "AppsFragment");
@@ -77,16 +89,42 @@ namespace Altdroid
             currentFragment = _appsFragment;
             btnApps.Click += BtnApps_Click;
             btnGames.Click += BtnGames_Click;
-            _searchTextBox.Click += _searchTextBox_Click;
+            _searchTextBox.TextChanged += _searchTextBox_TextChanged;
+            settings.Click += SettingsOnClick;
 
             //TODO - Refactor to user object
             string.IsNullOrWhiteSpace(await SecureStorage.GetAsync("token"));
 
         }
 
-        private void _searchTextBox_Click(object sender, EventArgs e)
+        private void SettingsOnClick(object sender, EventArgs e)
         {
-            
+            var trans = SupportFragmentManager.BeginTransaction();
+            SettingsDialogFragment dialog = new SettingsDialogFragment();
+            dialog.Show(trans, "Settings");
+            dialog.onSignoutClick += Dialog_onSignoutClick;
+        }
+
+        private async void Dialog_onSignoutClick(object sender, EventArgs e)
+        {
+            SecureStorage.Remove("user");
+            SecureStorage.Remove("token");
+            var intent = new Intent(this, typeof(Login));
+            this.StartActivity(intent);
+            this.Finish();
+        }
+
+        private void _searchTextBox_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(_searchTextBox.Text))
+            {
+                ShowFragment(_appsFragment);
+            }
+            else
+            {
+                ShowFragment(_searchFragment);
+                _searchFragment.newQuery(_searchTextBox.Text);
+            }
         }
 
         private void BtnGames_Click(object sender, System.EventArgs e)
@@ -113,20 +151,30 @@ namespace Altdroid
                     Resource.Animation.slide_apps_to_games);*/
                 changeColors(true);
             }
-            else
+            if(fragment == _gamesFragment)
             {
                 /*trans.SetCustomAnimations(Resource.Animation.slide_apps_to_games,
                     Resource.Animation.slide_games_to_apps);*/
                 changeColors(false);
             }
-            trans.SetCustomAnimations(Resource.Animation.slide_games_to_apps,
-                Resource.Animation.slide_apps_to_games);
+            if(fragment == _searchFragment)
+            {
+                _llCategories.Visibility = Android.Views.ViewStates.Gone;
+            }
+            if(fragment == _appsFragment || fragment == _gamesFragment)
+            {
+                trans.SetCustomAnimations(Resource.Animation.slide_games_to_apps,Resource.Animation.slide_apps_to_games);
+                _llCategories.Visibility = Android.Views.ViewStates.Visible;
+            }
             trans.Hide(currentFragment);
             trans.Show(fragment);
             trans.AddToBackStack(null);
             trans.Commit();
 
+            SupportFragmentManager.ExecutePendingTransactions();
+
             currentFragment = fragment;
+            return;
 
         }
 
