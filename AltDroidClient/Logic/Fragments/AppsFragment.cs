@@ -101,6 +101,7 @@ namespace Altdroid.Logic.Fragments
                 var request = new RestRequest("app", Method.Get);
                 request.AddQueryParameter("masterCategory", "1");
                 request.AddQueryParameter("sortBy", "downloads");
+                request.AddQueryParameter("orderBy", "desc");
                 var response = await http.ExecuteAsync<AppsSearchResponse>(request);
                 if (response.IsSuccessful)
                 {
@@ -118,6 +119,7 @@ namespace Altdroid.Logic.Fragments
                 var request = new RestRequest("app", Method.Get);
                 request.AddQueryParameter("masterCategory", "1");
                 request.AddQueryParameter("sortBy", "date");
+                request.AddQueryParameter("orderBy", "desc");
                 var response = await http.ExecuteAsync<AppsSearchResponse>(request);
                 if (response.IsSuccessful)
                 {
@@ -135,6 +137,7 @@ namespace Altdroid.Logic.Fragments
                 var request = new RestRequest("app",Method.Get);
                 request.AddQueryParameter("masterCategory", 1);
                 request.AddQueryParameter("sortBy", "rating");
+                request.AddQueryParameter("orderBy", "desc");
                 var response = await http.ExecuteAsync<AppsSearchResponse>(request);
                 if(response.IsSuccessful)
                 {
