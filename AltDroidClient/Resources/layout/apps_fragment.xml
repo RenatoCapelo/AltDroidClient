@@ -16,6 +16,7 @@
 				android:layout_height="wrap_content"
 				android:text="Apps em Destaque"
 				android:textColor="#fff"
+			 android:paddingBottom="5dp"
 				android:textAppearance="?android:attr/textAppearanceLarge"
 		/>
 		<androidx.recyclerview.widget.RecyclerView
@@ -36,6 +37,7 @@
 				android:layout_height="wrap_content"
 				android:text="Melhores Classificadas"
 				android:textColor="#fff"
+			android:paddingVertical="7.5dp"
 				android:textAppearance="?android:attr/textAppearanceLarge"
 		/>
 		<androidx.recyclerview.widget.RecyclerView
@@ -55,6 +57,7 @@
 				android:layout_height="wrap_content"
 				android:text="Recentemente Adicionadas"
 				android:textColor="#fff"
+			    android:padding="5dp"
 				android:textAppearance="?android:attr/textAppearanceLarge"
 		/>
 		<androidx.recyclerview.widget.RecyclerView
@@ -62,7 +65,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:scrollbars="horizontal"
-				
 		/>
 	</LinearLayout>
 </LinearLayout>

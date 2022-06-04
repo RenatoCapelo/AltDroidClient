@@ -150,28 +150,29 @@ namespace Altdroid.Logic.Activities
                 Toast.MakeText(this,"There was an error downloading the app", ToastLength.Long).Show();
             }
         }
-        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        protected override async void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
             switch (requestCode)
             {
                 case INSTALL_REQUEST_CODE:
-                    switch (resultCode)
+                    using (var http = new RestClient("https://api.appstore.renatoventura.pt"))
                     {
-                        case Result.Ok:
-                            btnDownload.Text = "Instalado!";
-                            Toast.MakeText(this, "The app was instaled!", ToastLength.Long).Show();
-                            break;
-                        case Result.Canceled:
-                            btnDownload.Text = "Download";
-                            btnDownload.Enabled = true;
-                            Toast.MakeText(this, "You canceled the instalation :(", ToastLength.Long).Show();
-                            break;
-                        case Result.FirstUser:
-                            btnDownload.Text = "Download";
-                            btnDownload.Enabled = true;
-                            Toast.MakeText(this, "There was an error during the instalation :(", ToastLength.Long).Show();
-                            break;
+                        var request = new RestRequest("App/Download/"+app.applicationGuid,Method.Post);
+                        request.AddHeader("Authorization", "bearer "+await SecureStorage.GetAsync("token"));
+                        var task = http.ExecuteAsync(request);
+                        Task.WaitAll(task);
+                    }
+                    if (packageExists(app.packageName))
+                    {
+                        btnDownload.Text = "Instalado!";
+                        Toast.MakeText(this,"Instalado com sucesso!",ToastLength.Long).Show();
+                    }
+                    else
+                    {
+                        btnDownload.Text = "Download";
+                        btnDownload.Enabled = true;
+                        Toast.MakeText(this,"Ocorreu um erro na instalação :/",ToastLength.Long).Show();
                     }
                     break;
             }

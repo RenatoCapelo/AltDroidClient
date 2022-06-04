@@ -76,8 +76,8 @@ namespace Altdroid.Logic.Fragments
             lm_newApps = new LinearLayoutManager(Context, LinearLayoutManager.Horizontal, false);
             lm_bestApps = new LinearLayoutManager(Context, LinearLayoutManager.Vertical, false);
 
-            SpacingDecorator verticalDecorator = new SpacingDecorator(5,5);
-            SpacingDecorator horizontalDecorator = new SpacingDecorator(0, 0, 5, 5);
+            SpacingDecorator verticalDecorator = new SpacingDecorator(10,10);
+            SpacingDecorator horizontalDecorator = new SpacingDecorator(0, 0, 10, 10);
 
             rv_featuredApps.SetLayoutManager(lm_featuredApps);
             rv_newApps.SetLayoutManager(lm_newApps);
