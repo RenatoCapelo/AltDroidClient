@@ -27,10 +27,12 @@ using App1.Logic.Adapters;
 using Altdroid.Logic.Views;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 using Android.Content.PM;
+using AndroidX.Core.Util;
+using AndroidX.Core.App;
 
 namespace Altdroid.Logic.Activities
 {
-    [Activity(Label = "AppDetails_Activity",ScreenOrientation =Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "App Details", Theme = "@style/AppTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class AppDetails_Activity : AppCompatActivity
     {
 
@@ -41,16 +43,21 @@ namespace Altdroid.Logic.Activities
         private ImageView btnBack;
         private TextView title;
         private TextView description;
-        private TextView rating;
         private TextView price;
         private ImageView logo;
         private Button btnDownload;
         private RecyclerView rv_Photos;
         private RecyclerView.LayoutManager lm_Photos;
         private ImageViewAdapter a_Photos;
+        private ImageView comments;
+
+        private TextView rating;
+        private TextView classificationText;
+        private ImageView starIcon;
+        
 
         private List<string> _photos;
-        protected override async void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             app = JsonConvert.DeserializeObject<AppToGet>(Intent.GetStringExtra("app"));
@@ -61,6 +68,9 @@ namespace Altdroid.Logic.Activities
             title = FindViewById<TextView>(Resource.Id.appDetails_Title);
             price = FindViewById<TextView>(Resource.Id.appDetails_Price);
             rating = FindViewById<TextView>(Resource.Id.appDetails_Rating);
+            comments = FindViewById<ImageView>(Resource.Id.appDetails_Comments);
+            classificationText = FindViewById<TextView>(Resource.Id.appDetails_classificationText);
+            starIcon = FindViewById<ImageView>(Resource.Id.appDetails_starIcon);
             rating.Text = app.ratingAverage.ToString();
             logo = FindViewById<ImageView>(Resource.Id.appDetails_logo);
             description = FindViewById<TextView>(Resource.Id.appDetails_Description);
@@ -75,6 +85,7 @@ namespace Altdroid.Logic.Activities
             description = FindViewById<TextView>(Resource.Id.appDetails_Description);
             description.MovementMethod = new ScrollingMovementMethod();
             btnDownload = FindViewById<Button>(Resource.Id.appDetails_Download);
+            comments.Click += Comments_Click;
             var exists = packageExists(app.packageName);
             if (exists)
             {
@@ -99,6 +110,20 @@ namespace Altdroid.Logic.Activities
                     .Into(logo);
             }
             // Create your application here
+        }
+
+        private void Comments_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(Comments_Activity));
+            Pair[] pairs = new Pair[]
+            {
+                new Pair(classificationText,"classificationTransition"),
+                new Pair(rating,"rating_valueTransition"),
+                new Pair(starIcon,"star_iconTransition")
+            };
+            intent.PutExtra("app",JsonConvert.SerializeObject(app));
+            ActivityOptionsCompat options = ActivityOptionsCompat.MakeSceneTransitionAnimation(this, pairs);
+            StartActivity(intent,options.ToBundle());
         }
 
         private async void BtnDownload_Click(object sender, EventArgs e)
@@ -191,7 +216,11 @@ namespace Altdroid.Logic.Activities
         }
         private void BtnBack_Click(object sender, EventArgs e)
         {
-            base.OnBackPressed();
+            OnBackPressed();
+        }
+        public override void OnBackPressed()
+        {
+            this.Finish();
         }
 
         private async void askPermission()

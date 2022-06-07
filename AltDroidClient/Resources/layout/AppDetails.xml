@@ -79,58 +79,96 @@
             android:background="@drawable/tworoundedcorners_rectangle"
             android:orientation="vertical">
             <!-- Classificação -->
-            <LinearLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:paddingHorizontal="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_alignParentStart="true"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Classificação"
+                        android:id="@+id/appDetails_classificationText"
+                    android:transitionName="classificationTransition"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:gravity="center"/>
+    
+                <LinearLayout
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                            android:paddingHorizontal="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/appDetails_Rating"
+                            tools:text="5.0"
+                            android:transitionName="rating_valueTransition"
+                            android:textSize="36sp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/fadedGreen"/>
+                    <ImageView
+                            android:id="@+id/appDetails_starIcon"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="10dp"
+                            android:layout_width="64dp"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitStart"
+                            android:transitionName="star_iconTransition"
+                            android:src="@drawable/staricon"/>
+                </LinearLayout>
+    </RelativeLayout>
+            <!--<LinearLayout
                 android:layout_weight="5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-                
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
+                <TextView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Classificação"
+            android:id="@+id/appDetails_classificationText"
+            android:transitionName="classificationTransition"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:gravity="center"
+        />
+        <LinearLayout
+            android:padding="24dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="10dp">
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Classificação"
-                        android:textColor="@color/white"
-                        android:textSize="24dp"
-                        android:gravity="bottom"/>
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-                            <TextView
-                                android:layout_weight="4"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/appDetails_Rating"
-                                tools:text="5.0"
-                                android:textSize="36dp"
-                                android:gravity="center"
-                                android:textColor="@color/fadedGreen"
-                            />
-                            <ImageView
-                                android:padding="5dp"
-                                android:layout_weight="5"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                
-                                android:src="@drawable/staricon"/>
-                    </LinearLayout>
-                </LinearLayout>
-                <Space
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
+                    android:id="@+id/appDetails_Rating"
+                    tools:text="5.0"
+                    android:transitionName="rating_valueTransition"
+                    android:textSize="36sp"
+                    android:gravity="center"
+                    android:textColor="@color/fadedGreen"
+                />
+                <ImageView
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitStart"
+                    android:transitionName="star_iconTransition"
+                    android:id="@+id/appDetails_starIcon"
+                    android:src="@drawable/staricon"/>
+        </LinearLayout>
+            </LinearLayout>-->
             <!-- Fotos -->
             <LinearLayout
-                xmlns:carousel="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3.5"
