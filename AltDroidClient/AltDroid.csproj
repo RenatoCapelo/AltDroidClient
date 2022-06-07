@@ -174,7 +174,7 @@
       <Version>20.1.0.58</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfCarousel.Android">
-      <Version>20.1.0.58</Version>
+      <Version>20.1.0.59</Version>
     </PackageReference>
     <PackageReference Include="System.IdentityModel.Tokens.Jwt">
       <Version>6.18.0</Version>
