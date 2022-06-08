@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Logic\Activities\AppDetails_Activity.cs" />
     <Compile Include="Logic\Activities\Comments_Activity.cs" />
+    <Compile Include="Logic\Activities\CreateCommentActivity.cs" />
     <Compile Include="Logic\Activities\LoginActivity.cs" />
     <Compile Include="Logic\Activities\MainActivity.cs" />
     <Compile Include="Logic\Adapters\AppCardHorizontalAdapter.cs" />
@@ -334,6 +335,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxhdpi\star_filled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\createCommentActivity.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
