@@ -166,7 +166,7 @@
       <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="RestSharp">
-      <Version>107.3.0</Version>
+      <Version>108.0.1</Version>
     </PackageReference>
     <PackageReference Include="Square.Picasso">
       <Version>2.71828.0</Version>
